@@ -1,0 +1,39 @@
+/ {
+    chosen {
+        zmk,underglow = &led_strip;
+    };
+
+    led_strip: ws2812 {
+        compatible = "worldsemi,ws2812-gpio";
+        label = "SK6812mini";
+
+        chain-length = <27>;
+        chain-length-left = <27>; // Количество светодиодов на левой половине
+        chain-length-right = <27>; // Количество светодиодов на правой половине
+
+        /* GPIO-пин для управления лентой */
+        gpios = <&gpio0 1 GPIO_ACTIVE_HIGH>;
+    };
+};
+
+&i2c1 {
+    status = "okay";
+    scl-pin = <27>;
+    sda-pin = <26>;
+
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        label = "DISPLAY";
+        width = <128>;
+        height = <32>;
+        segment-offset = <0>;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <31>;
+        segment-remap;
+        com-invdir;
+        com-sequential;
+        prechargep = <0x22>;
+    };
+};
