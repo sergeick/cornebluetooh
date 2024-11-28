@@ -91,9 +91,9 @@
 // | ALT  |  Я  |  Ч  |  С  |  М  |  И  |   |  Т  |  Ь   |  Б  | LEFT| DOWN| RIGHT|
 //                    | CTRL| LWR1| === |   | SPC | LWR2 | EN  |
                         bindings = <
-   &kp TAB   &kp RA(Q) &kp RA(W) &kp RA(E) &kp RA(R) &kp RA(T)   &kp RA(Y) &kp RA(U) &kp RA(I) &kp RA(O) &kp RA(P) &kp DEL
-   &kp LSHFT &kp RA(A) &kp RA(S) &kp RA(D) &kp RA(F) &kp RA(G)   &kp RA(H) &kp RA(J) &kp RA(K) &kp RA(L) &kp UP    &kp ENTER
-   &kp LALT  &kp RA(Z) &kp RA(X) &kp RA(C) &kp RA(V) &kp RA(B)   &kp RA(N) &kp RA(M) &kp RA(COMMA) &kp LEFT &kp DOWN &kp RIGHT
+   &kp TAB   &kp LA(Q) &kp LA(W) &kp LA(E) &kp LA(R) &kp LA(T)   &kp LA(Y) &kp LA(U) &kp LA(I) &kp LA(O) &kp LA(P) &kp DEL
+   &kp LSHFT &kp LA(A) &kp LA(S) &kp LA(D) &kp LA(F) &kp LA(G)   &kp LA(H) &kp LA(J) &kp LA(K) &kp LA(L) &kp UP    &kp ENTER
+   &kp LALT  &kp LA(Z) &kp LA(X) &kp LA(C) &kp LA(V) &kp LA(B)   &kp LA(N) &kp LA(M) &kp LA(COMMA) &kp LEFT &kp DOWN &kp RIGHT
                                  &kp LCTRL &mo 1 &trans   &kp SPACE &mo 2 &tog 0
                         >;
                 };
