@@ -105,10 +105,10 @@
                         bindings = <
    &trans &trans &trans &trans &trans &trans   &kp DOT   &kp COMMA &kp QMARK &kp SEMI  &trans &trans
    &trans &trans &trans &trans &trans &trans   &brackets &parens   &braces   &quotes   &trans &kp LC(ENTER)
-   &trans &trans &trans &trans &trans &trans   &trans    &kp BSLH  &FSLH &trans &trans
+   &trans &trans &trans &trans &trans &trans   &trans    &kp BSLH  &kp FSLH  &trans    &trans &trans
                            &trans &trans &trans   &trans &trans &kp C
                         >;
-        };
+                };
     };
 
     chosen {
