@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
+ * Copyright (c) 2024 The ZMK Contributors (SERGEICK)
  *
  * SPDX-License-Identifier: MIT
  */
@@ -47,20 +47,12 @@
     };
 
     behaviors {
-        lang_toggle: lang_toggle {
+        td_layer: tap_dance_layer {
             compatible = "zmk,behavior-tap-dance";
-            label = "LANG_TOGGLE";
+            label = "TAP_DANCE_LAYER";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&lang_switch>, <&lang_switch>;
-        };
-    };
-
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-        language_status {
-            if-layers = <3>;
-            then-layer = <4>;
+            bindings = <&mo 1>, <&tog 1>;
         };
     };
 
@@ -69,17 +61,16 @@
 
         default_layer {
 // -----------------------------------------------------------------------------------------
-// | TAB  |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP  |
+// | TAB  |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
 // | SHFT |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  UP | ENTER|
 // | ALT  |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ?  | LEFT| DOWN| RIGHT|
-//                    | CTRL| LWR === |   | SPC | LWR2 | RU  |
+//                    | CTRL| LWR1| === |   | SPC | LWR2 | RU  |
                         bindings = <
    &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BACKSPACE
    &kp LSHFT &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp UP   &kp ENTER
    &kp LALT  &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp QMARK &kp LEFT &kp DOWN &kp RIGHT
-                  &kp LCTRL &mo 1 &trans    &kp SPACE &mo 2 &lang_toggle
+                  &kp LCTRL &td_layer &trans    &kp SPACE &mo 2 &lang_switch
                         >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         lower_layer {
@@ -108,42 +99,6 @@
    &trans &trans &trans &trans &trans &trans   &trans    &kp BSLH  &kp FSLH  &trans    &trans &trans
                            &trans &trans &trans   &trans &trans &kp C
                         >;
-                };
-    };
-
-    chosen {
-        zmk,display = &oled;
-    };
-};
-
-&oled {
-    status = "okay";
-
-    display_layer {
-        compatible = "zmk,display-layer";
-        label = "LAYER";
-        position = <0>;
-        width = <128>;
-        height = <32>;
-    };
-
-    display_status {
-        compatible = "zmk,display-status";
-        label = "STATUS";
-        position = <1>;
-        width = <128>;
-        height = <16>;
-
-        language_status {
-            compatible = "zmk,display-text";
-            text = "LANG:";
-            position = <0>;
-        };
-
-        language_indicator: language_indicator {
-            compatible = "zmk,display-text";
-            text = "EN";
-            position = <40>;
         };
     };
 };
