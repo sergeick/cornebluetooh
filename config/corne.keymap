@@ -8,138 +8,82 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-& {
-    macros {
-        brackets: brackets {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LBKT &kp RBKT &kp LEFT>;  // []
-        };
-        
-        parens: parens {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LPAR &kp RPAR &kp LEFT>;  // ()
-        };
-        
-        braces: braces {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LBRC &kp RBRC &kp LEFT>;  // {}
-        };
-        
-        quotes: quotes {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp DQT &kp DQT &kp LEFT>;    // ""
+/ {
+        macros {
+                brackets: brackets {
+                        label = "brackets";
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp LBKT &kp RBKT &kp LEFT>;
+                };
+                
+                parens: parens {
+                        label = "parentheses";
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp LPAR &kp RPAR &kp LEFT>;
+                };
+                
+                braces: braces {
+                        label = "braces";
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp LBRC &kp RBRC &kp LEFT>;
+                };
+                
+                quotes: quotes {
+                        label = "quotes";
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp DQT &kp DQT &kp LEFT>;
+                };
+
+                lang_switch: lang_switch {
+                        label = "LANG_SWITCH";
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp LCTRL &kp LALT &kp SPACE>;
+                };
         };
 
-        qmark: qmark {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&mod_lshift &kp SLASH>;
+        behaviors {
+                lang_toggle: lang_toggle {
+                        compatible = "zmk,behavior-tap-dance";
+                        label = "LANG_TOGGLE";
+                        #binding-cells = <0>;
+                        tapping-term-ms = <200>;
+                        bindings = <&lang_switch>, <&lang_switch>;
+                };
         };
 
-        semi_shift: semi_shift {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp SEMI>;
-        };
+        keymap {
+                compatible = "zmk,keymap";
 
-        lang_switch: lang_switch {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LCTRL &kp LALT &kp SPACE>;
-        };
-    };
+                default_layer {
+                        bindings = <
+   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
+   &kp LSHFT &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp UP   &kp ENTER
+   &kp LALT  &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp LS(SLASH) &kp LEFT &kp DOWN &kp RIGHT
+                  &kp LCTRL &mo 1 &none    &kp SPACE &mo 2 &lang_toggle
+                        >;
+                };
 
-    behaviors {
-        lang_toggle: lang_toggle {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lang_switch>, <&lang_switch>;
-        };
-    };
+                lower_layer {
+                        bindings = <
+   &trans &kp N7 &kp N8 &kp N9 &kp KP_PLUS  &trans    &trans &trans &trans &trans &trans &trans
+   &trans &kp N4 &kp N5 &kp N6 &kp KP_MINUS &kp EQUAL &trans &trans &trans &trans &trans &kp ESC
+   &kp N0 &kp N1 &kp N2 &kp N3 &trans       &trans    &trans &trans &trans &trans &trans &trans
+                    &trans &trans &trans              &trans &trans &trans
+                        >;
+                };
 
-    keymap {
-        compatible = "zmk,keymap";
-
-        default_layer {
-    // -----------------------------------------------------------------------------------------
-    // | TAB  |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP  |
-    // | SHFT |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  UP | ENTER |
-    // | ALT  |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ?  | LEFT| DOWN| RIGHT |
-    //                    | CTRL| LWR1 |   | SPC | LWR2 | RU   |
-                bindings = <
-       &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-       &kp LSHFT &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp UP   &kp ENTER
-       &kp LALT  &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp QMARK &kp LEFT &kp DOWN &kp RIGHT
-                         &kp LCTRL &mo 1 &none    &kp SPACE &mo 2 &lang_toggle
-                >;
-                sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-        };
-
-        lower_layer {
-    // -----------------------------------------------------------------------------------------
-    // | === |  7  |  8  |  9  |  +  | === |   | === | === | === | === | === | === |
-    // | === |  4  |  5  |  6  |  -  |  =  |   | === | === | === | === | === | ESC  |
-    // |  0  |  1  |  2  |  3  | === | === |   | === | === | === | === | === | ===  |
-    //                    | === | LWR1 | === |   | === | === | ===  |
-                bindings = <
-       &trans &kp N7 &kp N8 &kp N9 &kp PLUS  &trans    &trans &trans &trans &trans &trans &trans
-       &trans &kp N4 &kp N5 &kp N6 &kp MINUS &kp EQUAL &trans &trans &trans &trans &trans &kp ESC
-       &kp N0 &kp N1 &kp N2 &kp N3 &trans    &trans    &trans &trans &trans &trans &trans &trans
-                         &trans &trans &trans              &trans &trans &trans
-                >;
-        };
-
-        raise_layer {
-    // -----------------------------------------------------------------------------------------
-    // | === | === | === | === | === | === |   |  .  |  ,  |  ?  |  ;  | === | === |
-    // | === | === | === | === | === | === |   |  [] |  () |  {} |  "" | === |CTRL+ENTER|
-    // | === | === | === | === | === | === |   | === |   \  |   /  | === | === | === |
-    //                    | === | === | === |   | === | LWR2 |   C   |
-                bindings = <
-       &trans &trans &trans &trans &trans &trans   &kp DOT   &kp COMMA &qmark    &semi_shift  &trans &trans
-       &trans &trans &trans &trans &trans &trans   &brackets &parens   &braces    &quotes   &trans &kp LC(ENTER)
-       &trans &trans &trans &trans &trans &trans   &trans    &kp BSLH  &kp FSLH   &trans    &trans &trans
+                raise_layer {
+                        bindings = <
+   &trans &trans &trans &trans &trans &trans   &kp KP_DOT &kp KP_COMMA &kp LS(SLASH) &kp SEMI &trans &trans
+   &trans &trans &trans &trans &trans &trans   &brackets  &parens      &braces       &quotes  &trans &kp LC(ENTER)
+   &trans &trans &trans &trans &trans &trans   &trans     &kp BSLH     &kp FSLH      &trans   &trans &trans
                            &trans &trans &trans   &trans &trans &kp C
-                >;
+                        >;
+                };
         };
-    };
-
-    chosen {
-        zmk,display = &oled;
-    };
-};
-
-&oled {
-    status = "okay";
-
-    display_layer {
-        compatible = "zmk,display-layer";
-        position = <0>;
-        width = <128>;
-        height = <32>;
-    };
-
-    display_status {
-        compatible = "zmk,display-status";
-        position = <1>;
-        width = <128>;
-        height = <16>;
-
-        language_status {
-            compatible = "zmk,display-text";
-            text = "LANG:";
-            position = <0>;
-        };
-
-        language_indicator: language_indicator {
-            compatible = "zmk,display-text";
-            text = "EN";
-            position = <40>;
-        };
-    };
 };
