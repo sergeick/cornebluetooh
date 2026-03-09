@@ -9,81 +9,81 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-        macros {
-                brackets: brackets {
-                        label = "brackets";
-                        compatible = "zmk,behavior-macro";
-                        #binding-cells = <0>;
-                        bindings = <&kp LBKT &kp RBKT &kp LEFT>;
-                };
-                
-                parens: parens {
-                        label = "parentheses";
-                        compatible = "zmk,behavior-macro";
-                        #binding-cells = <0>;
-                        bindings = <&kp LPAR &kp RPAR &kp LEFT>;
-                };
-                
-                braces: braces {
-                        label = "braces";
-                        compatible = "zmk,behavior-macro";
-                        #binding-cells = <0>;
-                        bindings = <&kp LBRC &kp RBRC &kp LEFT>;
-                };
-                
-                quotes: quotes {
-                        label = "quotes";
-                        compatible = "zmk,behavior-macro";
-                        #binding-cells = <0>;
-                        bindings = <&kp DQT &kp DQT &kp LEFT>;
-                };
-
-                lang_switch: lang_switch {
-                        label = "LANG_SWITCH";
-                        compatible = "zmk,behavior-macro";
-                        #binding-cells = <0>;
-                        bindings = <&kp LGUI &kp SPACE>;
-                };
+    macros {
+        brackets: brackets {
+            label = "brackets";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LBKT &kp RBKT &kp LEFT>;
+        };
+        
+        parens: parens {
+            label = "parentheses";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LPAR &kp RPAR &kp LEFT>;
+        };
+        
+        braces: braces {
+            label = "braces";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LBRC &kp RBRC &kp LEFT>;
+        };
+        
+        quotes: quotes {
+            label = "quotes";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp DQT &kp DQT &kp LEFT>;
         };
 
-        behaviors {
-                lang_toggle: lang_toggle {
-                        compatible = "zmk,behavior-tap-dance";
-                        label = "LANG_TOGGLE";
-                        #binding-cells = <0>;
-                        tapping-term-ms = <200>;
-                        bindings = <&lang_switch>, <&lang_switch>;
-                };
+        lang_switch: lang_switch {
+            label = "LANG_SWITCH";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LGUI &kp SPACE>;
+        };
+    };
+
+    behaviors {
+        lang_toggle: lang_toggle {
+            compatible = "zmk,behavior-tap-dance";
+            label = "LANG_TOGGLE";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&lang_switch>, <&lang_switch>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+    &kp TAB    &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BKSP
+    &kp LSHFT  &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp UP   &kp GRAVE
+    &bt BT_CLR &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp LS(SLASH) &kp LEFT &kp DOWN &kp RIGHT
+               &kp SPACE &mo 1 &kp LCTRL       &kp ENTER &mo 2 &kp GRAVE
+            >;
         };
 
-        keymap {
-                compatible = "zmk,keymap";
-
-                default_layer {
-                        bindings = <
-    &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BKSP
-    &kp LSHFT &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp UP   &kp GRAVE
-    &bt BT_CLR 0  &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp LS(SLASH) &kp LEFT &kp DOWN &kp RIGHT
-                   &kp SPACE &mo 1 &kp LCTRL    &kp ENTER &mo 2 &kp GRAVE
-                        >;
-                };
-
-                lower_layer {
-                        bindings = <
+        lower_layer {
+            bindings = <
     &kp ESC &kp N7 &kp N8 &kp N9 &kp KP_PLUS  &trans    &trans &trans &trans &trans &trans &kp DEL
-    &trans &kp N4 &kp N5 &kp N6 &kp KP_MINUS &kp EQUAL &trans &trans &trans &trans &trans &trans
-    &kp N0 &kp N1 &kp N2 &kp N3 &trans       &trans    &trans &trans &trans &trans &trans &trans
-                     &kp ENTER &trans &kp ENTER              &trans &trans &trans
-                        >;
-                };
+    &trans  &kp N4 &kp N5 &kp N6 &kp KP_MINUS &kp EQUAL &trans &trans &trans &trans &trans &trans
+    &kp N0  &kp N1 &kp N2 &kp N3 &trans       &trans    &trans &trans &trans &trans &trans &trans
+                   &kp ENTER &trans &kp ENTER             &trans &trans &trans
+            >;
+        };
 
-                raise_layer {
-                        bindings = <
+        raise_layer {
+            bindings = <
     &trans &trans &trans &trans &trans &trans   &kp KP_DOT &kp KP_COMMA &kp LS(SLASH) &kp SEMI &trans &trans
     &trans &trans &trans &trans &trans &trans   &brackets  &parens      &braces       &quotes  &trans &trans
     &trans &trans &trans &trans &trans &trans   &trans     &kp BSLH     &kp FSLH      &trans   &trans &trans
-                            &trans &trans &trans   &trans &trans &kp C
-                        >;
-                };
+                         &trans &trans &trans   &trans     &trans       &kp C
+            >;
         };
+    };
 };
